@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    region: ap-south-1
+  tasks:
+    - name: EC2 basic provisioning
+      ec2:
+        region: "{{ region }}"
+        key_name: rajesh-aws-login
+        instance_type: t2.micro
+        image: ami-041db4a969fe3eb68
+        wait: yes
+        group: sg_webserver_apmumbai
+        count: 1

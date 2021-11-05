@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    region: ap-south-1
+    keyname: rajesh-aws-login
+  tasks:
+    - name: Create Ec2 KeyPair
+      ec2_key:
+        region: "{{ region }}"
+        name: "{{ keyname }}"
+      register: mykey
+    - debug: var=mykey
+    - name: write to file
+      copy: content="{{ mykey.key.private_key }}" dest="~/.ssh/{{ keyname }}.pem" mode=600
+      when: mykey.changed

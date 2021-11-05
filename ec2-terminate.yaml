@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    region: ap-south-1
+  tasks:
+    - name: terminate ec2 instance
+      ec2:
+        region: "{{ region }}"
+        wait: yes
+        instance_ids: ['i-0be9dba0ffcb3983c']
+        state: absent
+

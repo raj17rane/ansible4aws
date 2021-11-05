@@ -1,0 +1,13 @@
+---
+-
+  name: removing existing key pair
+  hosts: localhost
+  gather_facts: no
+  vars:
+    region: ap-south-1
+  tasks:
+    - name: remove key pair
+      ec2_key:
+        region: "{{ region }}"
+        name: raj-aws-login
+        state: absent

@@ -1,0 +1,9 @@
+---
+- name: test first playbook
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: ensure apache is at latest level
+      yum: name=httpd state=latest
+    - name: ensure apache is running
+      service: name=httpd state=started

@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    region: ap-south-1
+    allowed_ip: 103.232.236.135/32
+  tasks:
+    - name: create the security group
+      ec2_group:
+        region: "{{ region }}"
+        name: sg_webserver_apmumbai
+        description: security group for ap-south-1 mumbai for webserver host
+        rules:
+
+      # allow ssh access from your ip
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: "{{ allowed_ip }}"
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0

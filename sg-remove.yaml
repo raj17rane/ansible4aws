@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    region: ap-south-1
+  tasks:
+    - name: remove security group
+      ec2_group:
+        name: kplables-variables
+        description: Managed by Terraform
+        state: absent

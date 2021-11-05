@@ -1,0 +1,11 @@
+---
+- name: Ensure boto and boto3 modules are installed
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: install boto boto3 modules
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - boto3
+        - botocore
